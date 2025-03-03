@@ -1,0 +1,14 @@
+[submodule "MicroROS Tools"]
+	path = pico_fw_ws/libmicroros/src/micro_ros_setup
+	url = https://github.com/micro-ROS/micro_ros_setup
+	branch = jazzy
+	ignore = all
+	
+[submodule "FreeRTOS Kernel"]
+	path = pico_fw_ws/libfreertos/FreeRTOS-Kernel
+	url = https://github.com/FreeRTOS/FreeRTOS-Kernel
+	ignore = all
+[submodule "Common Helper Libraries"]
+	path = pico_fw_ws/src/lib/Common_libs
+	url = https://github.com/samyarsadat/Pico-Libraries
+	branch = rp2350_dev
