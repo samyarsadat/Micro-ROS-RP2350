@@ -1,0 +1,28 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/${ROS_DISTRO}/lib/python3.10/site-packages",
+        "/opt/ros/${ROS_DISTRO}/local/lib/python3.10/dist-packages"
+    ],
+    
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.errorSquiggles": "enabled",
+    "cmake.sourceDirectory": "${workspaceFolder}",
+    "cmake.generator": "Unix Makefiles",
+    "cmake.parallelJobs": 12,
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.buildBeforeRun": true,
+    "cmake.configureOnOpen": true,
+    "cmake.deleteBuildDirOnCleanConfigure": true,
+    "cortex-debug.openocdPath": "openocd",
+
+    "cmake.options.statusBarVisibility": "hidden",
+    "cmake.options.advanced": {
+        "build": {"statusBarVisibility": "visible"},
+        "buildTarget": {"statusBarVisibility": "hidden"},
+        "launch": {"statusBarVisibility": "hidden"},
+        "launchTarget": {"statusBarVisibility": "visible"},
+        "debug": {"statusBarVisibility": "hidden"},
+        "variant": {"statusBarVisibility": "icon"},
+        "kit": {"statusBarVisibility": "icon"}
+    }
+}

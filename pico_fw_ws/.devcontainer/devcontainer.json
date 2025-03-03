@@ -1,0 +1,72 @@
+/*
+    Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+    Copyright 2025 Samyar Sadat Akhavi
+    Written by Samyar Sadat Akhavi, 2025.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https: www.gnu.org/licenses/>.
+*/
+
+
+{
+    "name": "MicroROS Workspace (Robot)",
+    "remoteUser": "nonroot",
+    "overrideCommand": true,
+    "postCreateCommand": "/devcon_post_create.sh",
+    "postStartCommand": "/devcon_post_start.sh",
+    
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-iot.vscode-ros",
+                "smilerobotics.urdf",
+                "redhat.vscode-xml",
+                "redhat.vscode-yaml",
+                "tamasfe.even-better-toml",
+                "timonwong.shellcheck",
+                "yzhang.markdown-all-in-one",
+                "ms-vscode.cmake-tools",
+                "mcu-debug.memory-view",
+                "mcu-debug.rtos-views",
+                "mcu-debug.peripheral-viewer",
+                "mcu-debug.debug-tracker-vscode",
+                "marus25.cortex-debug",
+                "zainchen.json",
+                "ms-vscode.vscode-serial-monitor"
+            ]
+        }
+    },
+
+    "workspaceFolder": "/home/nonroot/pico_ws",
+    "mounts": [{"source": "${localWorkspaceFolder}/src", "target": "/home/nonroot/pico_ws/src", "type": "bind"},
+               {"source": "${localWorkspaceFolder}/libmicroros", "target": "/home/nonroot/pico_ws/libmicroros", "type": "bind"},
+               {"source": "${localWorkspaceFolder}/libfreertos", "target": "/home/nonroot/pico_ws/libfreertos", "type": "bind"},
+               {"source": "${localWorkspaceFolder}/CMakeLists.txt", "target": "/home/nonroot/pico_ws/CMakeLists.txt", "type": "bind"},
+               {"source": "${localWorkspaceFolder}/micro_ros.cmake", "target": "/home/nonroot/pico_ws/micro_ros.cmake", "type": "bind"},
+               {"source": "${localWorkspaceFolder}/build", "target": "/home/nonroot/pico_ws/build", "type": "bind"}],
+
+    "runArgs": ["--net=host",
+                "--cap-add=SYS_PTRACE",
+                "--security-opt", "seccomp=unconfined",
+                "--gpus", "all",
+                "-v", "/tmp/.X11-unix:/tmp/.X11-unix:rw",
+                "--env=DISPLAY",
+                "-v", "/dev:/dev",
+                "--device-cgroup-rule=c *:* rmw"]
+}

@@ -1,0 +1,14 @@
+
+pico_fw_ws/build/**
+!pico_fw_ws/build/.gitkeep
+pico_fw_ws/libmicroros/firmware
+pico_fw_ws/libmicroros/src/build
+pico_fw_ws/libmicroros/src/install
+pico_fw_ws/libmicroros/src/log
+pico_fw_ws/libmicroros/src/rrp_pico_coms/build
+pico_fw_ws/libmicroros/src/rrp_pico_coms/install
+pico_fw_ws/libmicroros/src/rrp_pico_coms/log
+**/.idea
+**/.venv
+**/__pycache__
+**/desktop.ini
