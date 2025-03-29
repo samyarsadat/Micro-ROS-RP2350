@@ -9,7 +9,3 @@
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel
 	ignore = all
 
-[submodule "Common Helper Libraries"]
-	path = pico_fw_ws/src/lib/Common_libs
-	url = https://github.com/samyarsadat/Pico-Libraries
-	branch = rp2350_dev
