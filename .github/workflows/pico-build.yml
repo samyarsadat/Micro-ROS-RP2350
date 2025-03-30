@@ -1,0 +1,107 @@
+#  Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+#  Copyright 2025 Samyar Sadat Akhavi
+#  Written by Samyar Sadat Akhavi, 2025.
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https: www.gnu.org/licenses/>.
+
+name: Build Pico Source Code
+on: push
+
+env:
+    FIRMWARE_PATH: "pico_fw_ws"
+    FREERTOS_KERNEL_IMPORT: "libfreertos/FreeRTOS-Kernel/portable/ThirdParty/Community-Supported-Ports/GCC/RP2350_ARM_NTZ/FreeRTOS_Kernel_import.cmake"
+
+jobs:
+    build_uros:
+        name: Build the micro-ROS library
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+
+            - name: Copy FreeRTOS Kernel Import File
+              shell: bash
+              run: |
+                  cp "${FIRMWARE_PATH}/${FREERTOS_KERNEL_IMPORT}" \
+                  "${FIRMWARE_PATH}/FreeRTOS_Kernel_import.cmake"
+
+            - name: Generate Pico SDK Headers
+              uses: samyarsadat/Pico-Build-Action@v1
+              with:
+                  source_dir: ${{env.FIRMWARE_PATH}}
+                  output_dir: "build"
+                  cmake_config_only: "true"
+                  cmake_args: "-DCMAKE_BUILD_TYPE=Release"
+
+            - name: Build MicroROS Library
+              id: build
+              uses: samyarsadat/MicroROS-Build-Action@v1-jazzy
+              with:
+                  microros_dir: ${{env.FIRMWARE_PATH}}/libmicroros
+                  clone_microros_setup: "false"
+                  environment_setup_script: ".github/workflows/rp2350_env_setup.sh"
+
+            - name: Upload MicroROS Library Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: uros_library_artifacts
+                  path: ${{steps.build.outputs.library_build_dir}}
+                  if-no-files-found: error
+
+    build_pico:
+        name: Build the Pico source code
+        runs-on: ubuntu-latest
+        needs: build_uros
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+
+            - name: Download MicroROS Library Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: uros_library_artifacts
+                  path: ${{env.FIRMWARE_PATH}}/libmicroros/firmware/build
+
+            - name: Copy FreeRTOS Kernel Import File
+              shell: bash
+              run: |
+                  cp "${FIRMWARE_PATH}/${FREERTOS_KERNEL_IMPORT}" \
+                  "${FIRMWARE_PATH}/FreeRTOS_Kernel_import.cmake"
+
+            - name: Build Pico Source Code
+              id: build
+              uses: samyarsadat/Pico-Build-Action@v1
+              with:
+                  source_dir: ${{env.FIRMWARE_PATH}}
+                  output_dir: "build"
+                  output_ext: "*.uf2 *.elf *.elf.map *.hex *.bin *.dis"
+                  output_ignored_dirs: "src/lib _deps"
+                  cmake_args: "-DCMAKE_BUILD_TYPE=Release"
+
+            - name: Upload Pico Source Code Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pico_binary_artifacts
+                  path: ${{steps.build.outputs.output_dir}}
+                  if-no-files-found: error

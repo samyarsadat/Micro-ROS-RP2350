@@ -114,13 +114,8 @@ TaskHandle_t task_handle_core0 = NULL, task_handle_core1 = NULL, task_handle_uro
 
 
 // ---- Functions ----
-void sub_cb_core0(const void * msgin) {
-    const std_msgs__msg__Int32 * msg = (const std_msgs__msg__Int32 *)msgin;
-    LOG_DEBUG("Core %d received: %d", get_core_num(), msg->data);
-}
-
-void sub_cb_core1(const void * msgin) {
-    const std_msgs__msg__Int32 * msg = (const std_msgs__msg__Int32 *)msgin;
+void sub_callback(const void *msgin) {
+    const std_msgs__msg__Int32 *msg = (const std_msgs__msg__Int32 *)msgin;
     LOG_DEBUG("Core %d received: %d", get_core_num(), msg->data);
 }
 
@@ -148,8 +143,8 @@ bool init_microros() {
     RCCHECK(rclc_subscription_init_default(&subscriber_core1, &node, int32_type_supp, "core1_sub"));
     LOG_DEBUG("Subscriptions created successfully.");
 
-    RCCHECK(rclc_executor_add_subscription(&executor_core0, &subscriber_core0, &sub_msg_core0, &sub_cb_core0, ON_NEW_DATA));
-    RCCHECK(rclc_executor_add_subscription(&executor_core1, &subscriber_core1, &sub_msg_core1, &sub_cb_core1, ON_NEW_DATA));
+    RCCHECK(rclc_executor_add_subscription(&executor_core0, &subscriber_core0, &sub_msg_core0, &sub_callback, ON_NEW_DATA));
+    RCCHECK(rclc_executor_add_subscription(&executor_core1, &subscriber_core1, &sub_msg_core1, &sub_callback, ON_NEW_DATA));
     LOG_DEBUG("Subscriptions added to executors successfully.");
 
     return true;
