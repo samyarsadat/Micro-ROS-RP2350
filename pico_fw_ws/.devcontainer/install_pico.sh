@@ -7,7 +7,7 @@
 # Exit on error
 set -e
 
-JNUM=12         # Number of threads (jobs) when running make
+JNUM=16         # Number of threads (jobs) when running make
 OUTDIR="/pico"  # Where will the output go?
 
 # Dependencies
@@ -28,8 +28,8 @@ cd $OUTDIR
 # Clone sw repos
 GITHUB_PREFIX="https://github.com/raspberrypi/"
 GITHUB_SUFFIX=".git"
-SDK_BRANCH="1.5.1"
-PICOTOOL_BRANCH="1.1.2"
+SDK_BRANCH="master"
+PICOTOOL_BRANCH="master"
 
 echo "" >> ~/.bashrc
 echo "" >> /home/$NONROOT_USERNAME/.bashrc
@@ -75,14 +75,15 @@ cmake ../
 make -j$JNUM
 
 echo "Installing picotool to /usr/local/bin/picotool"
-cp picotool /usr/local/bin/
+sudo ln -s picotool /usr/local/bin/picotool
+sudo make install
 
 cd $OUTDIR
 
 # Build OpenOCD
 echo "Building OpenOCD"
 cd $OUTDIR
-OPENOCD_BRANCH="rp2040-v0.12.0"
+OPENOCD_BRANCH="sdk-2.0.0"
 OPENOCD_CONFIGURE_ARGS="--enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio --enable-picoprobe"
 git clone "${GITHUB_PREFIX}openocd${GITHUB_SUFFIX}" -b $OPENOCD_BRANCH --depth=1
 cd openocd

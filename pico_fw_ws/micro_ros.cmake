@@ -8,7 +8,7 @@ endif ()
 add_library(micro_ros STATIC)
 
 # Add include directory
-target_include_directories(micro_ros PUBLIC 
+target_include_directories(micro_ros PUBLIC
     ${MICRO_ROS_PATH}/include
     ${MICRO_ROS_PATH}/include/rcl
     ${MICRO_ROS_PATH}/include/rcutils

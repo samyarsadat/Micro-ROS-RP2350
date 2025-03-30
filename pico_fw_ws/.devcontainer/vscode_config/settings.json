@@ -8,7 +8,7 @@
     "C_Cpp.errorSquiggles": "enabled",
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.generator": "Unix Makefiles",
-    "cmake.parallelJobs": 12,
+    "cmake.parallelJobs": 16,
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "cmake.buildBeforeRun": true,
     "cmake.configureOnOpen": true,

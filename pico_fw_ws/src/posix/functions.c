@@ -5,14 +5,12 @@
 #include <errno.h>
 
 
-
 // POSIX microsecond delay function.
 int usleep(uint64_t us)
 {
     vTaskDelay(pdMS_TO_TICKS(us / 1000 + (us % 1000 != 0)));
     return 0;
 }
-
 
 // POSIX get current time function.
 int clock_gettime(clockid_t unused, struct timespec *tp)
@@ -22,7 +20,6 @@ int clock_gettime(clockid_t unused, struct timespec *tp)
     tp->tv_nsec = (m % 1000000) * 1000;
     return 0;
 }
-
 
 // Not a POSIX function, but a stub to temporarily silence
 // a linker warning that occurs when using GCC 13.

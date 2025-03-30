@@ -7,8 +7,10 @@
             "command": "openocd",
             "args": [
                 "-f", "interface/cmsis-dap.cfg",
-                "-f", "target/rp2040.cfg",
-                "-c", "adapter speed 5000; program {${command:cmake.launchTargetPath}} verify reset exit"
+                "-f", "target/rp2350.cfg",
+                "-c", "rp2350.dap.core1 cortex_m reset_config sysresetreq",
+                "-c", "adapter speed 5000",
+                "-c", "program {${command:cmake.launchTargetPath}} verify; reset; reset; exit"
             ]
         }
     ]

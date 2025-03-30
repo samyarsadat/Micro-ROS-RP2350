@@ -30,10 +30,9 @@ pico_add_extra_outputs(${PICO_NAME})
 # Link to libraries
 target_link_libraries(${PICO_NAME} micro_ros
                                    pico_stdlib
-                                   helpers_lib    
-                                   local_helpers_lib
-                                   freertos_helpers_lib
-                                   uros_freertos_helpers_lib
+                                   pico_stdio_usb
+                                   pico_stdio_uart
+                                   pico_async_context_freertos
                                    FreeRTOS-Kernel
                                    FreeRTOS-Kernel-Heap4
 )
@@ -43,7 +42,6 @@ target_include_directories(${PICO_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
 # Target-specific compile definitions
 target_compile_definitions(${PICO_NAME} PRIVATE
-    PICO_USE_STACK_GUARDS=1
     PICO_DEFAULT_UART=0
     PICO_DEFAULT_UART_TX_PIN=0
     PICO_DEFAULT_UART_RX_PIN=1
@@ -59,8 +57,9 @@ pico_enable_stdio_usb(${PICO_NAME} 1)
 pico_enable_stdio_uart(${PICO_NAME} 1)
 
 # CMake flags
-set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
+set(FLAGS "${CMAKE_C_FLAGS} -mthumb -ffunction-sections -fdata-sections")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS}")
 
 # Compile definitions & options
 add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)

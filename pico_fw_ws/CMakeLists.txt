@@ -19,6 +19,10 @@
 # Set minimum required version of CMake
 cmake_minimum_required(VERSION 3.12)
 
+# Set Pico Board and Pico Platform
+set(PICO_PLATFORM rp2350-arm-s)
+set(PICO_BOARD pico2)
+
 # Set project name and Pico A/B name suffixes.
 set(PROJ_NAME RP2350_MicroROS_Tests)
 set(PICO_NAME ${PROJ_NAME}_Pico)
@@ -27,7 +31,8 @@ set(PICO_NAME ${PROJ_NAME}_Pico)
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
 # Set project name and C/C++ standards
-project(${PROJ_NAME} VERSION 0.1.0 LANGUAGES C CXX ASM)
+string(TIMESTAMP DATEVER "%Y.%m.%d" UTC)
+project(${PROJ_NAME} VERSION ${DATEVER} LANGUAGES C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -47,6 +52,6 @@ set(MICRO_ROS_PATH "${CMAKE_CURRENT_LIST_DIR}/libmicroros/firmware/build" CACHE 
 include(micro_ros.cmake)
 
 # Add our source directory
-add_subdirectory(src)
+add_subdirectory(src/pico)
 
 message("Configuration completed! (${PROJ_NAME} - v${PROJECT_VERSION})")

@@ -1,7 +1,7 @@
 /*
     FreeRTOS V202212.00
     Copyright (C) 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-    Copyright (C) 2024 Samyar Sadat Akhavi.
+    Copyright (C) 2024-2025 Samyar Sadat Akhavi.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of
     this software and associated documentation files (the "Software"), to deal in
@@ -144,6 +144,12 @@
 /* FreeRTOS + POSIX related configuration. */
 #define configUSE_POSIX_ERRNO                   0
 
+/* New RP2350 configuration */
+#define configENABLE_MPU                        0
+#define configENABLE_TRUSTZONE                  0
+#define configRUN_FREERTOS_SECURE_ONLY          1
+#define configENABLE_FPU                        1
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY    16
 
 /* Set the following definitions to 1 to include the API function, or zero to exclude the API function. */
 #define INCLUDE_vTaskPrioritySet                1
@@ -163,6 +169,7 @@
 #define INCLUDE_xTaskResumeFromISR              1
 #define INCLUDE_xQueueGetMutexHolder            1
 #define INCLUDE_xSemaphoreGetMutexHolder        1
+
 
 /* A header file that defines trace macro can be included here. */
 
