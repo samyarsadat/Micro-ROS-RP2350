@@ -4,7 +4,6 @@
 
 
 bool pico_serial_transport_open(struct uxrCustomTransport *transport) {
-    // Not using USB right now, but this is fine.
     return stdio_usb_connected();
 }
 
