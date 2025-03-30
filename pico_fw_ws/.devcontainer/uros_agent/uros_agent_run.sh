@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091
-
 # Temporary script for running the MicroROS agent.
 # DO NOT RUN AS ROOT, RUN AS NON-ROOT USER!
 

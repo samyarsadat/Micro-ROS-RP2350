@@ -20,6 +20,7 @@
 
 #define PRINTF_BUFFER_SIZE  256
 #define TASK_STACK_SIZE     1024
+#define USE_UART_TRANSPORT  0   // Set to 1 to use UART transport, 0 for USB transport.
 
 // ---- Libraries ----
 #include <stdio.h>
@@ -43,20 +44,24 @@
 
 
 // ---- Logging ----
-void usb_printf(const char *format, ...) {
+void log_printf(const char *format, ...) {
     char buffer[PRINTF_BUFFER_SIZE];
     va_list args;
     va_start(args, format);
     
     int length = vsnprintf(buffer, PRINTF_BUFFER_SIZE, format, args);
     if (length > 0) {
-        stdio_usb.out_chars(buffer, length);    
+        #if USE_UART_TRANSPORT
+            stdio_usb.out_chars(buffer, length);
+        #else
+            stdio_uart.out_chars(buffer, length);
+        #endif
     }
     
     va_end(args);
 }
 
-#define LOG_DEBUG(format, ...) usb_printf("[DEBUG][%s:%d] " format "\r\n", __func__, __LINE__, ##__VA_ARGS__)
+#define LOG_DEBUG(format, ...) log_printf("[DEBUG][%s:%d] " format "\r\n", __func__, __LINE__, ##__VA_ARGS__)
 
 
 // ---- Return Checkers ----
@@ -308,7 +313,13 @@ int main()
     stdio_usb_init();
     while (!stdio_usb_connected());
     stdio_uart_init();
-    stdio_filter_driver(&stdio_uart);
+
+    #if USE_UART_TRANSPORT
+        stdio_filter_driver(&stdio_uart);
+    #else
+        stdio_filter_driver(&stdio_usb);
+    #endif
+
     LOG_DEBUG("STDIO initialized.");
 
     srand(to_us_since_boot(get_absolute_time()));

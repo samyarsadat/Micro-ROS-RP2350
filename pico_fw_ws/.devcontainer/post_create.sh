@@ -22,7 +22,6 @@ sudo apt-get update \
 echo "-> Installing ELF size analyzer..."
 pip install --no-warn-script-location --break-system-packages elf-size-analyze
 
-# These were moved here because they only need to be run once!
 echo "export PATH='$PATH:$HOME/.local/bin'" >> $HOME/.bashrc
 echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> $HOME/.bashrc
 echo "source $HOME/pico_ws/libmicroros/src/install/local_setup.bash" >> $HOME/.bashrc

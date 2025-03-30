@@ -7,7 +7,7 @@
 # Exit on error
 set -e
 
-JNUM=16         # Number of threads (jobs) when running make
+JNUM=$(nproc)   # Number of threads (jobs) when running make
 OUTDIR="/pico"  # Where will the output go?
 
 # Dependencies
@@ -58,7 +58,6 @@ fi
 
 # Pick up new variables we just defined
 source ~/.bashrc
-
 cd $OUTDIR
 
 # Picotool
@@ -73,7 +72,6 @@ mkdir build
 cd build
 cmake ../
 make -j$JNUM
-
 echo "Installing picotool to /usr/local/bin/picotool"
 sudo ln -s picotool /usr/local/bin/picotool
 sudo make install
