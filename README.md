@@ -14,6 +14,7 @@
 ----
 This repository contains test firmware and build configuration for building and running micro-ROS on the Raspberry Pi RP2350 (ARM Cortex-M33 cores) microcontroller, with multi-threading and Symmetric Multi Processing (SMP) support.
 
+<br>
 
 ## Overview
 
@@ -30,6 +31,8 @@ When testing micro-ROS with FreeRTOS on the RP2040 months ago, I was unable to g
 I did not spend much effort to try to fix this issue, though I suspect it was a bug in some locking code somewhere, so I created an abstraction that allowed me to "publish" messages from both cores, whilst only calling `rcl_publish()` from core 0. This was not ideal (and resulted in some message lifetime issues, as message publication was asynchronous), but it worked.
 
 I am happy to report, however, that everything functions perfectly on the new RP2350, and that there is no need for such an abstraction. The example provided in this repository publishes from, and runs an executor on both cores.
+
+<br>
 
 ## The Example
 The example program provided in this repository is meant to be a starting point, and a demonstration of multi-threaded and multi-core operations using micro-ROS and FreeRTOS on the RP2350. It doesn't rely on any external libraries (other than the FreeRTOS Kernel, micro-ROS, and the standard Pico C SDK libraries, of course).
