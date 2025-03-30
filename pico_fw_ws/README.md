@@ -28,7 +28,7 @@ When prompted to select a build kit by the CMake Tools extension, select `GCC [v
 <br>
 
 ## Note On Using Debug Probes
-If you're using a debug probe (such as the Raspberry Pi Debug Probe), make sure to create a file named `60-openocd.rules` in `/etc/udev/rules.d` on the host machine (not the devcontainer) and copy the contents of `https://github.com/raspberrypi/openocd/blob/rp2040-v0.12.0/contrib/60-openocd.rules` into it. This is so that the probe can be accessed witout having to use `sudo`, which is needed when using the Cortex-Debug extension in VSCode.
+If you're using a debug probe (such as the Raspberry Pi Debug Probe), make sure to create a file named `60-openocd.rules` in `/etc/udev/rules.d` on the host machine (not the devcontainer) and copy the contents of [this file](https://github.com/raspberrypi/openocd/blob/sdk-2.0.0/contrib/60-openocd.rules) into it. This is so that the probe can be accessed witout having to use `sudo`, which is needed when using the Cortex-Debug extension in VSCode.
 
 Run `udevadm control --reload` (again, on the host machine) to make sure that the new rules take effect.
 
