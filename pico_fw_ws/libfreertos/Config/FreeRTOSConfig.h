@@ -144,12 +144,6 @@
 /* FreeRTOS + POSIX related configuration. */
 #define configUSE_POSIX_ERRNO                   0
 
-/* New RP2350 configuration */
-#define configENABLE_MPU                        0
-#define configENABLE_TRUSTZONE                  0
-#define configRUN_FREERTOS_SECURE_ONLY          1
-#define configENABLE_FPU                        1
-#define configMAX_SYSCALL_INTERRUPT_PRIORITY    16
 
 /* Set the following definitions to 1 to include the API function, or zero to exclude the API function. */
 #define INCLUDE_vTaskPrioritySet                1

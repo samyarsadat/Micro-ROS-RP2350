@@ -1,4 +1,4 @@
-#  Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+#  Raspberry Pi RP2350 MicroROS tests (RP2040 backport) - The ROS Robot Project Research.
 #  Copyright 2025 Samyar Sadat Akhavi
 #  Written by Samyar Sadat Akhavi, 2025.
 #
@@ -20,7 +20,7 @@ on: push
 
 env:
     FIRMWARE_PATH: "pico_fw_ws"
-    FREERTOS_KERNEL_IMPORT: "libfreertos/FreeRTOS-Kernel/portable/ThirdParty/Community-Supported-Ports/GCC/RP2350_ARM_NTZ/FreeRTOS_Kernel_import.cmake"
+    FREERTOS_KERNEL_IMPORT: "libfreertos/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake"
 
 jobs:
     build_uros:

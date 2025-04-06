@@ -1,5 +1,5 @@
 /*
-    Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+    Raspberry Pi RP2350 MicroROS tests (RP2040 backport) - The ROS Robot Project Research.
     Basic dual-core publisher/subscriber example with FreeRTOS for RP2350.
     Copyright 2025 Samyar Sadat Akhavi
     Written by Samyar Sadat Akhavi, 2025.

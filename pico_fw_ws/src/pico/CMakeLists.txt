@@ -1,4 +1,4 @@
-#  Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+#  Raspberry Pi RP2350 MicroROS tests (RP2040 backport) - The ROS Robot Project Research.
 #  Copyright 2025 Samyar Sadat Akhavi
 #  Written by Samyar Sadat Akhavi, 2025.
 #
@@ -42,6 +42,8 @@ target_include_directories(${PICO_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
 # Target-specific compile definitions
 target_compile_definitions(${PICO_NAME} PRIVATE
+    PICO_STACK_SIZE=0x1000
+    PICO_USE_STACK_GUARDS=1
     PICO_DEFAULT_UART=0
     PICO_DEFAULT_UART_TX_PIN=0
     PICO_DEFAULT_UART_RX_PIN=1
@@ -50,7 +52,7 @@ target_compile_definitions(${PICO_NAME} PRIVATE
 # PicoTool binary information
 pico_set_program_name(${PICO_NAME} ${PICO_NAME})
 pico_set_program_version(${PICO_NAME} ${PROJECT_VERSION})
-pico_set_program_description(${PICO_NAME} "The ROS Robot Project Research - RP2350 MicroROS Test Firmware")
+pico_set_program_description(${PICO_NAME} "The ROS Robot Project Research - RP2040 MicroROS Test Firmware")
 
 # Enable STDIO over USB and UART
 pico_enable_stdio_usb(${PICO_NAME} 1)
