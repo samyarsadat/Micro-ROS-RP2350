@@ -55,6 +55,7 @@ jobs:
               with:
                   microros_dir: ${{env.FIRMWARE_PATH}}/libmicroros
                   clone_microros_setup: "false"
+                  environment_setup_script: ".github/workflows/rp2_env_setup.sh"
 
             - name: Upload MicroROS Library Artifacts
               uses: actions/upload-artifact@v4
