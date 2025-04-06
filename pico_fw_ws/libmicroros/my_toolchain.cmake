@@ -1,4 +1,4 @@
-#  Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+#  Raspberry Pi RP2350 MicroROS tests (RP2040 backport) - The ROS Robot Project Research.
 #  Copyright 2025 Samyar Sadat Akhavi
 #  Written by Samyar Sadat Akhavi, 2025.
 #
@@ -21,7 +21,7 @@ set(PICO_GCC_TRIPLE "arm-none-eabi")
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_CROSSCOMPILING 1)
-set(CMAKE_SYSTEM_PROCESSOR cortex-m33)
+set(CMAKE_SYSTEM_PROCESSOR cortex-m0plus)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 if (NOT PICO_GCC_TRIPLE)
@@ -42,7 +42,7 @@ set(CMAKE_CXX_COMPILER ${PICO_COMPILER_CXX} CACHE FILEPATH "C++ compiler")
 set(CMAKE_C_COMPILER_WORKS 1 CACHE INTERNAL "")
 set(CMAKE_CXX_COMPILER_WORKS 1 CACHE INTERNAL "")
     
-set(FLAGS "-O2 -mcpu=cortex-m33 -mthumb -ffunction-sections -fdata-sections -fno-exceptions -nostdlib -D'RCUTILS_LOG_MIN_SEVERITY=RCUTILS_LOG_MIN_SEVERITY_NONE'" CACHE STRING "" FORCE)
+set(FLAGS "-O2 -mcpu=cortex-m0plus -mthumb -ffunction-sections -fdata-sections -fno-exceptions -nostdlib -D'RCUTILS_LOG_MIN_SEVERITY=RCUTILS_LOG_MIN_SEVERITY_NONE'" CACHE STRING "" FORCE)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAGS} -DCLOCK_MONOTONIC=0 -D'__attribute__(x)='" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS} -fno-rtti -DCLOCK_MONOTONIC=0 -D'__attribute__(x)='" CACHE STRING "" FORCE)
@@ -55,7 +55,7 @@ add_compile_options(
 add_compile_definitions(PLATFORM_NAME_FREERTOS)
 set(FREERTOS_KERNEL_PATH "${CMAKE_CURRENT_LIST_DIR}/../libfreertos/FreeRTOS-Kernel")
 include_directories("${FREERTOS_KERNEL_PATH}/include") 
-include_directories("${FREERTOS_KERNEL_PATH}/portable/ThirdParty/Community-Supported-Ports/GCC/RP2350_ARM_NTZ/non_secure")
+include_directories("${FREERTOS_KERNEL_PATH}/portable/ThirdParty/GCC/RP2040/include")
 
 # FreeRTOS config
 set(FREERTOS_CONFIG_DIR "${CMAKE_CURRENT_LIST_DIR}/../libfreertos/Config")
@@ -63,6 +63,7 @@ include_directories("${FREERTOS_CONFIG_DIR}")
 
 # Raspberry Pi Pico SDK headers
 set(PICO_SDK_PATH $ENV{PICO_SDK_PATH})
+add_compile_definitions(PICO_RP2040)
 include_directories("${PICO_SDK_PATH}/src/common/pico_base_headers/include")
 include_directories("${PICO_SDK_PATH}/src/rp2_common/hardware_base/include")
 include_directories("${PICO_SDK_PATH}/src/rp2_common/hardware_sync/include")
@@ -70,9 +71,8 @@ include_directories("${PICO_SDK_PATH}/src/rp2_common/hardware_sync_spin_lock/inc
 include_directories("${PICO_SDK_PATH}/src/rp2_common/pico_platform_compiler/include")
 include_directories("${PICO_SDK_PATH}/src/rp2_common/pico_platform_sections/include")
 include_directories("${PICO_SDK_PATH}/src/rp2_common/pico_platform_panic/include")
-include_directories("${PICO_SDK_PATH}/src/rp2350/hardware_regs/include")
-include_directories("${PICO_SDK_PATH}/src/rp2350/hardware_structs/include")
-include_directories("${PICO_SDK_PATH}/src/rp2350/pico_platform/include")
+include_directories("${PICO_SDK_PATH}/src/rp2040/hardware_regs/include")
+include_directories("${PICO_SDK_PATH}/src/rp2040/pico_platform/include")
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../build/generated/pico_base")   # Auto-generated headers
 
 # Ignore all warnings. This is not recommended practice, but most warnings here are
