@@ -10,15 +10,24 @@ echo "MicroROS Library Build Script."
 echo "NOTE: DO NOT RUN AS ROOT, RUN AS 'nonroot'!"
 echo ""
 
-while getopts bfr flag
+while getopts dbfr flag
 do
     case "${flag}" in
+        d) DEBUG_BUILD="true";;
         b) FULL_REBUILD="false";;
         f) FULL_REBUILD="true";;
         r) REINSTALL_PACKAGES="true";;
-        *) echo "Invalid flags! (-b: firmware build only, -f: full re-build, -r: re-install packages)" && exit 1;;
+        *) echo "Invalid flags! (-d: debug build, -b: firmware build only, -f: full re-build, -r: re-install packages)" && exit 1;;
     esac
 done
+
+if [ "$DEBUG_BUILD" == "true" ]; then
+    echo "Debug build enabled."
+    export CMAKE_BUILD_DEBUG=1
+else
+    echo "Release build enabled."
+    unset CMAKE_BUILD_DEBUG
+fi
 
 if [ "$FULL_REBUILD" == "true" ]; then
     read -p "This will delete the previous build and start from scratch. Continue? (y/n) " confirm
