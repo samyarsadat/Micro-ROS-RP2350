@@ -4,7 +4,7 @@ Run `bash ~/pico_ws/libmicroros/build_uros.sh -rf` as `nonroot` inside of the de
 <br>
 
 ## Pico Firmware Pre-built Binaries
-Please take a look at the [`pico-build` workflow](https://github.com/samyarsadat/Micro-ROS-RP2350/actions/workflows/pico-build.yml) artifact called `pico_binary_artifacts` for the latest binary builds.
+Please take a look at the [`pico-build` workflow](https://github.com/samyarsadat/Micro-ROS-RP2350/actions/workflows/pico-build.yml) artifact called `pico_binary_artifacts_RP2350` for the latest binary builds.
 
 #### Action Status
 [![Build Pico Source Code](https://github.com/samyarsadat/Micro-ROS-RP2350/actions/workflows/pico-build.yml/badge.svg)](https://github.com/samyarsadat/Micro-ROS-RP2350/actions/workflows/pico-build.yml)<br>
