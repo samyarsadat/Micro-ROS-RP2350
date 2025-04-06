@@ -1,4 +1,4 @@
-#  Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+#  Raspberry Pi RP2350 MicroROS tests (RP2040 backport) - The ROS Robot Project Research.
 #  Copyright 2025 Samyar Sadat Akhavi
 #  Written by Samyar Sadat Akhavi, 2025.
 #

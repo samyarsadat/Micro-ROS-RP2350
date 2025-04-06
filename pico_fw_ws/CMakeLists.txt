@@ -1,4 +1,4 @@
-#  Raspberry Pi RP2350 MicroROS tests - The ROS Robot Project Research.
+#  Raspberry Pi RP2350 MicroROS tests (RP2040 backport) - The ROS Robot Project Research.
 #  Copyright 2025 Samyar Sadat Akhavi
 #  Written by Samyar Sadat Akhavi, 2025.
 #
@@ -20,11 +20,11 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Set Pico Board and Pico Platform
-set(PICO_PLATFORM rp2350-arm-s)
-set(PICO_BOARD pico2)
+set(PICO_PLATFORM rp2040)
+set(PICO_BOARD pico)
 
 # Set project name and Pico A/B name suffixes.
-set(PROJ_NAME RP2350_MicroROS_Tests)
+set(PROJ_NAME RP2040_MicroROS_Tests)
 set(PICO_NAME ${PROJ_NAME}_Pico)
 
 # Include build functions from the Pico SDK

@@ -9,15 +9,14 @@
             "type": "cortex-debug",
             "servertype": "openocd",
             "gdbPath" : "gdb-multiarch",
-            "device": "RP2350",
+            "device": "RP2040",
             "rtos": "auto",
             "searchDir": ["/pico/openocd/tcl"],
-            "svdFile": "${env:PICO_SDK_PATH}/src/rp2350/hardware_regs/RP2350.svd",
+            "svdFile": "${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/RP2040.svd",
             "runToEntryPoint": "main",
             "showDevDebugOutput": "none",
             
             "openOCDLaunchCommands": [
-                "rp2350.dap.core1 cortex_m reset_config sysresetreq",
                 "adapter speed 5000"
             ],
             
@@ -28,7 +27,7 @@
 
             "configFiles": [
                 "interface/cmsis-dap.cfg",
-                "target/rp2350.cfg"
+                "target/rp2040.cfg"
             ],
 
             "postRestartCommands": [

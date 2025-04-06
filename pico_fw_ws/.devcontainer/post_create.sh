@@ -8,7 +8,7 @@ echo "-> First container run, running MicroROS tools setup..."
 
 echo "-> Setting folder permissions and copying files..."
 sudo chown -R nonroot: $HOME/pico_ws/
-cp "$HOME/pico_ws/libfreertos/FreeRTOS-Kernel/portable/ThirdParty/Community-Supported-Ports/GCC/RP2350_ARM_NTZ/FreeRTOS_Kernel_import.cmake" \
+cp "$HOME/pico_ws/libfreertos/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake" \
     $HOME/pico_ws/FreeRTOS_Kernel_import.cmake
     
 echo "-> Installing MicroROS tools..."
