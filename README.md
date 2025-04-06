@@ -14,6 +14,8 @@
 ----
 This repository contains test firmware and build configuration for building and running micro-ROS on the Raspberry Pi RP2350 (ARM Cortex-M33 cores) microcontroller, with multi-threading and Symmetric Multi Processing (SMP) support.
 
+Take a look at the [`rp2040-backport`](https://github.com/samyarsadat/Micro-ROS-RP2350/tree/rp2040-backport) branch if you want to benefit from some of the workflow improvements (as well as the move to v2 of the Pico SDK) made during the RP2350 transition, with your RP2040 projects.
+
 <br>
 
 ## Overview
