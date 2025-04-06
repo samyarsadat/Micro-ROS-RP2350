@@ -31,7 +31,7 @@ if(DEFINED ENV{CMAKE_BUILD_DEBUG})
 else()
     message(STATUS "Build type is RELEASE")
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
-    set(DEBUG_OPT_FLAGS "-02" CACHE STRING "" FORCE)
+    set(DEBUG_OPT_FLAGS "-O2" CACHE STRING "" FORCE)
 endif()
 
 pico_find_compiler(PICO_COMPILER_CC ${PICO_GCC_TRIPLE}-gcc)
