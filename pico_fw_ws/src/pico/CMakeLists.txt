@@ -41,7 +41,7 @@ target_link_libraries(${TARGET_NAME} micro_ros
 target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
 # Target-specific compile definitions
-target_compile_definitions(${PICO_NAME} PRIVATE
+target_compile_definitions(${TARGET_NAME} PRIVATE
     PICO_DEFAULT_UART=0
     PICO_DEFAULT_UART_TX_PIN=0
     PICO_DEFAULT_UART_RX_PIN=1
