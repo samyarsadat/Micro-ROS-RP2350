@@ -23,10 +23,6 @@ cmake_minimum_required(VERSION 3.12)
 set(PICO_PLATFORM rp2350-arm-s)
 set(PICO_BOARD pico2)
 
-# Set project name and Pico A/B name suffixes.
-set(PROJ_NAME RP2350_MicroROS_Tests)
-set(PICO_NAME ${PROJ_NAME}_Pico)
-
 # Include build functions from the Pico SDK
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
