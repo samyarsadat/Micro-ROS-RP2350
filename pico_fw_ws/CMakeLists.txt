@@ -23,16 +23,12 @@ cmake_minimum_required(VERSION 3.12)
 set(PICO_PLATFORM rp2040)
 set(PICO_BOARD pico)
 
-# Set project name and Pico A/B name suffixes.
-set(PROJ_NAME RP2040_MicroROS_Tests)
-set(PICO_NAME ${PROJ_NAME}_Pico)
-
 # Include build functions from the Pico SDK
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
-# Set project name and C/C++ standards
+# Set project name, version, and C/C++ standards
 string(TIMESTAMP DATEVER "%Y.%m.%d" UTC)
-project(${PROJ_NAME} VERSION ${DATEVER} LANGUAGES C CXX ASM)
+project(Micro-ROS-RP2040 VERSION ${DATEVER} LANGUAGES C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -54,4 +50,14 @@ include(micro_ros.cmake)
 # Add our source directory
 add_subdirectory(src/pico)
 
-message("Configuration completed! (${PROJ_NAME} - v${PROJECT_VERSION})")
+# C/C++ flags
+set(FLAGS "-mthumb -ffunction-sections -fdata-sections")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS}")
+
+# Global compile definitions
+add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
+add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
+add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)
+
+message("Project ${PROJECT_NAME} v${PROJECT_VERSION} configured.")

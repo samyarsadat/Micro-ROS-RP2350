@@ -16,32 +16,32 @@
 #  along with this program.  If not, see <https: www.gnu.org/licenses/>.
 
 
-
 # ---- Pico firmware ----
-message("Configuring Pico firmware build... (${PICO_NAME})")
+set(TARGET_NAME "${PROJECT_NAME}")
+message("Configuring target ${TARGET_NAME} firmware build...")
 
 # Add source files
-add_executable(${PICO_NAME} main.c++
-                            ../posix/functions.c)
+add_executable(${TARGET_NAME} main.c++
+                              ../posix/functions.c)
 
 # Create map/bin/hex/uf2 files
-pico_add_extra_outputs(${PICO_NAME})
+pico_add_extra_outputs(${TARGET_NAME})
 
 # Link to libraries
-target_link_libraries(${PICO_NAME} micro_ros
-                                   pico_stdlib
-                                   pico_stdio_usb
-                                   pico_stdio_uart
-                                   pico_async_context_freertos
-                                   FreeRTOS-Kernel
-                                   FreeRTOS-Kernel-Heap4
+target_link_libraries(${TARGET_NAME} micro_ros
+                                     pico_stdlib
+                                     pico_stdio_usb
+                                     pico_stdio_uart
+                                     pico_async_context_freertos
+                                     FreeRTOS-Kernel
+                                     FreeRTOS-Kernel-Heap4
 )
 
 # Link to include directories
-target_include_directories(${PICO_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
 # Target-specific compile definitions
-target_compile_definitions(${PICO_NAME} PRIVATE
+target_compile_definitions(${TARGET_NAME} PRIVATE
     PICO_STACK_SIZE=0x1000
     PICO_USE_STACK_GUARDS=1
     PICO_DEFAULT_UART=0
@@ -50,21 +50,13 @@ target_compile_definitions(${PICO_NAME} PRIVATE
 )
 
 # PicoTool binary information
-pico_set_program_name(${PICO_NAME} ${PICO_NAME})
-pico_set_program_version(${PICO_NAME} ${PROJECT_VERSION})
-pico_set_program_description(${PICO_NAME} "The ROS Robot Project Research - RP2040 MicroROS Test Firmware")
+pico_set_program_name(${TARGET_NAME} ${TARGET_NAME})
+pico_set_program_version(${TARGET_NAME} ${PROJECT_VERSION})
+pico_set_program_description(${TARGET_NAME} "The ROS Robot Project Research - RP2040 MicroROS Test Firmware")
 
 # Enable STDIO over USB and UART
-pico_enable_stdio_usb(${PICO_NAME} 1)
-pico_enable_stdio_uart(${PICO_NAME} 1)
+pico_enable_stdio_usb(${TARGET_NAME} 1)
+pico_enable_stdio_uart(${TARGET_NAME} 1)
 
-# CMake flags
-set(FLAGS "${CMAKE_C_FLAGS} -mthumb -ffunction-sections -fdata-sections")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS}")
-
-# Compile definitions & options
-add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
-add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
-add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)
-add_compile_options(-Wall -Wextra -Wpedantic)
+# Enable pedantic warnings
+target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic)
