@@ -28,7 +28,7 @@ Some header files were moved around, and some were separated and re-structured. 
 Other than that, most other changes to the micro-ROS build configuration were ones made as a result of the different CPU architecture used by the RP2350's ARM cores (ARM Cortex-M0+ for RP2040 vs. ARM Cortex-M33 for RP2350), we're not using the Hazard 3 Risc-V cores here.
 
 #### Dual-core operation & SMP support
-When testing micro-ROS with FreeRTOS on the RP2040 months ago, I was unable to get multi-core operation to work. Multi-threading on core 0 worked fine, if I called any RCL functions from core 1, the processor would deadlock. 
+When testing micro-ROS with FreeRTOS on the RP2040 months ago, I was unable to get multi-core operation to work. Multi-threading on core 0 worked fine, however, if I called any RCL functions from core 1, the processor would deadlock. 
 
 I did not spend much effort to try to fix this issue, though I suspect it was a bug in some locking code somewhere, so I created an abstraction that allowed me to "publish" messages from both cores, whilst only calling `rcl_publish()` from core 0. This was not ideal (and resulted in some message lifetime issues, as message publication was asynchronous), but it worked.
 
