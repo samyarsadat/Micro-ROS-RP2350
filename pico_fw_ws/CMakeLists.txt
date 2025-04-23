@@ -32,7 +32,7 @@ include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
 # Set project name, version, and C/C++ standards
 string(TIMESTAMP DATEVER "%Y.%m.%d" UTC)
-project(Micro-ROS-RP2040 VERSION ${DATEVER} LANGUAGES C CXX ASM)
+project(Micro-ROS-RP2350 VERSION ${DATEVER} LANGUAGES C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
