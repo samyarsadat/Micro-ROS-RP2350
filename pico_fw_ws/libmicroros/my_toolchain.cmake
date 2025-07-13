@@ -42,7 +42,7 @@ set(CMAKE_CXX_COMPILER ${PICO_COMPILER_CXX} CACHE FILEPATH "C++ compiler")
 set(CMAKE_C_COMPILER_WORKS 1 CACHE INTERNAL "")
 set(CMAKE_CXX_COMPILER_WORKS 1 CACHE INTERNAL "")
 
-set(FLAGS "${DEBUG_OPT_FLAGS} -mcpu=cortex-m33 -mthumb -ffunction-sections -fdata-sections -fno-exceptions -nostdlib -D'RCUTILS_LOG_MIN_SEVERITY=RCUTILS_LOG_MIN_SEVERITY_NONE'" CACHE STRING "" FORCE)
+set(FLAGS "${DEBUG_OPT_FLAGS} -mcpu=cortex-m0plus -mthumb -ffunction-sections -fdata-sections -fno-exceptions -nostdlib -D'RCUTILS_LOG_MIN_SEVERITY=RCUTILS_LOG_MIN_SEVERITY_NONE'" CACHE STRING "" FORCE)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAGS} -DCLOCK_MONOTONIC=0 -D'__attribute__(x)='" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS} -fno-rtti -DCLOCK_MONOTONIC=0 -D'__attribute__(x)='" CACHE STRING "" FORCE)
