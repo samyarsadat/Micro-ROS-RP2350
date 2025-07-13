@@ -32,7 +32,6 @@ target_link_libraries(${TARGET_NAME} micro_ros
                                      pico_stdlib
                                      pico_stdio_usb
                                      pico_stdio_uart
-                                     pico_async_context_freertos
                                      FreeRTOS-Kernel
                                      FreeRTOS-Kernel-Heap4
 )
